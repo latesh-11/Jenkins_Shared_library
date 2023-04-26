@@ -6,7 +6,7 @@ def call( String project , String imageTag , String userName ){
             docker image push ${userName}/${project}:latest
 
 
-            sh 'docker image rm -f ${JOB_NAME}:v1.${BUILD_ID} lateshh/${JOB_NAME}:v1.${BUILD_ID} lateshh/${JOB_NAME}:latest '
+            sh 'docker image rm -f ${project}:v1.${imageTag} ${userName}/${project}:v1.${imageTag} docker image push ${userName}/${project}:latest'
         '''
     }
 }
