@@ -1,3 +1,3 @@
-def call() {
-    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api-key'
+def call(credentialsId) {
+    waitForQualityGate abortPipeline: false, credentialsId: credentialsId
 }
