@@ -13,7 +13,7 @@
 // }
 
 def call( String region , String accountID , String userName ) {
-    withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
+    withAWS(credentials: 'AWS_creds', region: 'us-east-1'){
         sh """
             aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${accountID}.dkr.ecr.${region}.amazonaws.com
             docker push ${accountID}.dkr.ecr.${region}.amazonaws.com/${userName}:latest
