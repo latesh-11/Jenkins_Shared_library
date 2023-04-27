@@ -12,7 +12,7 @@
 //     }
 // }
 
-def call(String userName , String accountID , String region ) (credentials) {
+def call(credentials , String userName , String accountID , String region ) {
     withAWS(credentials: credentials){
         sh """
             aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${accountID}.dkr.ecr.${region}.amazonaws.com 
