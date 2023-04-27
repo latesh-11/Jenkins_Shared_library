@@ -6,7 +6,7 @@
 //         '''
 // }
 
-def call(String region , String accountID , String userName) {
+def call( String userName , String accountID ,  String region ) {
   
     sh """
       docker build -t ${userName} .
