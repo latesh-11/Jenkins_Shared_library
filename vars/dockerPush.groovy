@@ -13,10 +13,13 @@
 // }
 
 def call( String region , String accountID , String userName ) {
-    sh """
-        aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${accountID}.dkr.ecr.${region}.amazonaws.com
-        docker push ${accountID}.dkr.ecr.${region}.amazonaws.com/${userName}:latest
+    withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
+        sh """
+            aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${accountID}.dkr.ecr.${region}.amazonaws.com
+            docker push ${accountID}.dkr.ecr.${region}.amazonaws.com/${userName}:latest
         
-        docker rm image -f ${accountID}.dkr.ecr.${region}.amazonaws.com/${userName}:latest
-    """
+            docker rm image -f ${accountID}.dkr.ecr.${region}.amazonaws.com/${userName}:latest
+        """
+    }    
+   
 }
